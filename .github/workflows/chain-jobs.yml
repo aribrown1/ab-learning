@@ -35,6 +35,7 @@ jobs:
   job-4:
     name: Job 4
     runs-on: ubuntu-latest
+    if: always() # Always run this job regardless of previous job success
     needs:
       - job-2
       - job-3

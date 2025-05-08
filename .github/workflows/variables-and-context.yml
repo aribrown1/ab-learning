@@ -8,6 +8,12 @@ on:
         required: true
         type: string
 
+# Define environment variables at workflow level
+env:
+  VAR1: myworkflowvar1
+  VAR2: myworkflowvar2
+  VAR3: myworkflowvar3
+
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -35,3 +41,18 @@ jobs:
     needs: job2 # We are reference outputs from job2
     steps:
       - run: echo ${{ needs.job2.outputs.output1 }} ${{ needs.job2.outputs.output2 }}
+
+  job4:
+    runs-on: ubuntu-latest
+    env:
+      VAR2: myjobvar2 # Override VAR2 for this job
+      VAR3: myjobvar3 # Override VAR3 for this job
+    steps:
+      - run: |
+          echo $VAR1
+          echo ${{ env.VAR1 }}
+          echo ""
+          echo $VAR2
+          echo $VAR3
+        env:
+          VAR3: mystepvar3

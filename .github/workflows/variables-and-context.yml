@@ -1,6 +1,14 @@
 name: Variables and Context
 
 on:
+  pull_request:
+    branches:
+      - main
+    inputs:
+      name:
+        default: Arianna
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       name:
